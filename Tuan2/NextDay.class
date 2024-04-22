@@ -1,0 +1,55 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+public class NextDay {
+   public NextDay() {
+   }
+
+   public static void Main(String[] var0) {
+      byte var1 = 31;
+      byte var2 = 12;
+      short var3 = 2012;
+      System.out.println("Input date");
+      String var4 = nextDay(var1, var2, var3);
+      System.out.println(var4);
+   }
+
+   public static String nextDay(int var0, int var1, int var2) {
+      if (!isValidDate(var0, var1, var2)) {
+         return "Invalid date";
+      } else {
+         if (var0 < 31) {
+            ++var0;
+         } else {
+            var0 = 1;
+            if (var1 < 12) {
+               ++var1;
+            } else {
+               var1 = 1;
+               ++var2;
+            }
+         }
+
+         return "Next date: " + var0 + "/" + var1 + "/" + var2;
+      }
+   }
+
+   public static boolean isValidDate(int var0, int var1, int var2) {
+      if (var2 >= 1812 && var2 <= 2012) {
+         if (var1 >= 1 && var1 <= 12) {
+            return var0 >= 1 && var0 <= getDaysInMonth(var1, var2);
+         } else {
+            return false;
+         }
+      } else {
+         return false;
+      }
+   }
+
+   public static int getDaysInMonth(int var0, int var1) {
+      int[] var2 = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+      return var0 == 2 && isLeapYear(var1) ? 29 : var2[var0 - 1];
+   }
+
+   public static boolean isLeapYear(int var0) {
+      return var0 % 4 == 0 && var0 % 100 != 0 || var0 % 400 == 0;
+   }
+}
